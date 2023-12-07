@@ -21,7 +21,7 @@ namespace Forest
                 Console.WriteLine(tree.GetInfo());
             }
             Console.WriteLine("Hello world!");
-            Console.ReadKey();
+            Console.ReadLine();
         }
     }
 
