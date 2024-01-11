@@ -7,72 +7,51 @@ namespace Forest
     {
         static void Main(string[] args)
         {
-            Forest forest = new Forest();
-            forest.PlantTrees(10);
-            for (int i = 0; i < Tree.daysOfYear; i++) //yearly
-            {
-                foreach (Tree tree in forest.trees)
-                {
-                    tree.Growing();
-                }
-            }
-            foreach (Tree tree in forest.trees)
-            {
-                Console.WriteLine(tree.GetInfo());
-            }
+            //Forest forest = new Forest();
+            //forest.PlantTrees(10);
+            //for (int i = 0; i < Tree.daysOfYear; i++) //yearly
+            //{
+            //    foreach (Tree tree in forest.trees)
+            //    {
+            //        tree.Growing();
+            //    }
+            //}
+            //foreach (Tree tree in forest.trees)
+            //{
+            //    Console.WriteLine(tree.GetInfo());
+            //}
             Console.WriteLine("Hello world!");
-            Console.ReadLine();
-        }
-    }
-
-    class Forest
-    {
-        public List<Tree> trees;
-
-        public Forest()
-        {
-            trees = new List<Tree>();
-        }
-
-        public void PlantTrees(int count)
-        {
-            for (int i = 0; i < count; i++)
+            do
             {
-                trees.Add(new Tree());
-            }
-        }
-    }
-
-    class Tree
-    {
-        private double age; //year
-        private double radius, height;
-        private static double widthIncrement = 0.01; // mm/year
-        private static double heightIncrement = 2.0; // mm/year
-        public static double daysOfYear = 365.25;
-
-        public Tree()
-        {
-            age = 0;
-            radius = 0;
-            height = 0;
-        }
-
-        ~Tree()
-        {
-            Console.WriteLine("The tree was destroyed.");
-        }
-
-        public void Growing() //daily
-        {
-            age += 1 / daysOfYear;
-            radius += widthIncrement / daysOfYear;
-            height += heightIncrement / daysOfYear;
-        }
-
-        public string GetInfo()
-        {
-            return $"---------- Tree info ----------\nAge = {this.age}\nRadius = {this.radius}\nHeight = {this.height}\n";
+                Console.Write("radius stromu = ");
+                double.TryParse(Console.ReadLine(), out double radius);
+                Console.Write("vyska stromu = ");
+                double.TryParse(Console.ReadLine(), out double height);
+                Console.Write("pocet konarov = ");
+                double.TryParse(Console.ReadLine(), out double branchCount);
+                Console.Write("typ stromu [T, L, C, B] = ");
+                string treeType = Console.ReadLine().Trim().ToUpper();
+                Tree tree;
+                switch (treeType)
+                {
+                    case "T":
+                        tree = new Tree(radius, height, branchCount);
+                        break;
+                    case "L":
+                        tree = new LeafTree(radius, height, branchCount);
+                        break;
+                    case "C":
+                        tree = new ConiferTree(radius, height, branchCount);
+                        break;
+                    case "B":
+                        tree = new BaobabTree(radius, height, branchCount);
+                        break;
+                    default:
+                        tree = new Tree(radius, height, branchCount);
+                        break;
+                }
+                Console.WriteLine($"\n{tree.GetInfo()}\n");
+            } while (true);
         }
     }
 }
