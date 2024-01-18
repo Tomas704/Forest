@@ -11,19 +11,6 @@ namespace Forest
         //public Tree() { }
         //~Tree() { }
 
-        protected class Konar
-        {
-            public Konar()
-            {
-
-            }
-
-            ~Konar()
-            {
-
-            }
-        }
-
         protected double age; //year
         protected double radius, height;
         protected static double widthIncrement = 0.01; // mm/year
@@ -36,15 +23,17 @@ namespace Forest
                 return Math.PI * Math.Pow(radius, 2) * height * 1.0 / 3.0;
             }
         }
-        protected Array konare;
-        public double pocetKonarov;
+        
+        public double branchesCount;
+        List<Branch> branches;
 
         public Tree()
         {
             age = 0;
             radius = 0;
             height = 0;
-            pocetKonarov = 0;
+            branchesCount = 0;
+            branches = new List<Branch>();
         }
 
         public Tree(double radius, double height, double pocetKonarov)
@@ -52,7 +41,8 @@ namespace Forest
             age = 0;
             this.radius = radius;
             this.height = height;
-            this.pocetKonarov = pocetKonarov;
+            this.branchesCount = pocetKonarov;
+            this.branches = new List<Branch>();
         }
 
         ~Tree()
