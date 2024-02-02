@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaobabTree.cs" />
+    <Compile Include="Execption.cs" />
     <Compile Include="Forest.cs" />
+    <Compile Include="IOrganizmus.cs" />
     <Compile Include="LeaveTree.cs" />
     <Compile Include="ConiferTree.cs" />
     <Compile Include="Program.cs" />

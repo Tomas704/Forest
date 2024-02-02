@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forest
 {
-    internal class Tree
+    internal class Tree : IOrganizmus
     {
         //public Tree() { }
         //~Tree() { }
@@ -25,7 +25,7 @@ namespace Forest
         }
         
         public double branchesCount;
-        List<Branch> branches;
+        protected List<Branch> branches;
 
         public Tree()
         {
@@ -36,12 +36,12 @@ namespace Forest
             branches = new List<Branch>();
         }
 
-        public Tree(double radius, double height, double pocetKonarov)
+        public Tree(double radius, double height, double branchesCount)
         {
             age = 0;
             this.radius = radius;
             this.height = height;
-            this.branchesCount = pocetKonarov;
+            this.branchesCount = branchesCount;
             this.branches = new List<Branch>();
         }
 
@@ -52,9 +52,12 @@ namespace Forest
 
         public virtual void Growing() //daily
         {
+            //throw new NotImplementedException();
             age += 1 / daysOfYear;
             radius += widthIncrement / daysOfYear;
             height += heightIncrement / daysOfYear;
+            Branch branch1 = new Branch();
+            branches.Add(branch1);
         }
 
         //public double ObjemStromu(int count, double radiusKonara, double heightKonara)
