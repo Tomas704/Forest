@@ -20,6 +20,7 @@ namespace Forest
             //{
             //    Console.WriteLine(tree.GetInfo());
             //}
+            /// class je prepis akym vytvarame/instancujeme objekt
             Console.WriteLine("Hello world!");
             do
             {
@@ -40,14 +41,11 @@ namespace Forest
                     Console.Write($"vyska {i + 1}. konara = ");
                     double.TryParse(Console.ReadLine(), out heightsOfBranches[i]);
                 }
-                Console.Write("typ stromu [T, L, C, B] = ");
+                Console.Write("typ stromu [L, C, B] = ");
                 string treeType = Console.ReadLine().Trim().ToUpper();
                 Tree tree;
                 switch (treeType)
                 {
-                    case "T":
-                        tree = new Tree(radius, height, branchesCount, radiusesOfBranches, heightsOfBranches);
-                        break;
                     case "L":
                         tree = new LeafTree(radius, height, branchesCount, radiusesOfBranches, heightsOfBranches);
                         break;
@@ -58,7 +56,7 @@ namespace Forest
                         tree = new BaobabTree(radius, height, branchesCount, radiusesOfBranches, heightsOfBranches);
                         break;
                     default:
-                        tree = new Tree(radius, height, branchesCount, radiusesOfBranches, heightsOfBranches);
+                        tree = new LeafTree(radius, height, branchesCount, radiusesOfBranches, heightsOfBranches);
                         break;
                 }
                 for (int i = 0; i < daysCount; i++)

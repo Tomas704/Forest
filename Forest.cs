@@ -19,7 +19,7 @@ namespace Forest
         {
             for (int i = 0; i < count; i++)
             {
-                trees.Add(new Tree());
+                trees.Add(new LeafTree());
             }
         }
     }

@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaobabTree.cs" />
+    <Compile Include="Birch.cs" />
+    <Compile Include="BranchPostion.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Execption.cs" />
     <Compile Include="Forest.cs" />

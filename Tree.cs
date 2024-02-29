@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Forest
 {
-    internal class Tree : IOrganizmus
+    abstract class Tree : IOrganizmus
     {
         //public Tree() { }
         //~Tree() { }
