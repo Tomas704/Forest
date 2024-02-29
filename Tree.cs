@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,14 +22,14 @@ namespace Forest
             {
                 double trunkVolume = Math.PI * Math.Pow(radius, 2) * height * 1.0 / 3.0;
                 double branchesVolume = 0;
-                for (int i = 0; i < branches.Count; i++)
-                    branchesVolume += branches[i].Volume;
+                for (int i = 0; i < dictBranches.Keys.Count; i++)
+                    branchesVolume += dictBranches.Keys.ElementAt(i).Volume;
                 return trunkVolume += branchesVolume;
             }
         }
         
         public double branchesCount;
-        protected List<Branch> branches;
+        protected Dictionary<Branch,BranchPostion> dictBranches;
 
         public Tree(double branchesCount = 0)
         {
@@ -36,9 +37,9 @@ namespace Forest
             this.radius = 0;
             this.height = 0;
             this.branchesCount = branchesCount;
-            this.branches = new List<Branch>();
+            this.dictBranches = new Dictionary<Branch, BranchPostion>();
             for (int i = 0; i < branchesCount; i++)
-                branches.Add(new Branch());
+                dictBranches.Add(new Branch(), new BranchPostion());
         }
 
         public Tree(double radius, double height, double branchesCount, double[] radiusesOfBranches, double[] heightsOfBranches)
@@ -47,9 +48,9 @@ namespace Forest
             this.radius = radius;
             this.height = height;
             this.branchesCount = branchesCount;
-            this.branches = new List<Branch>();
+            this.dictBranches = new Dictionary<Branch, BranchPostion>();
             for (int i = 0; i < branchesCount; i++)
-                branches.Add(new Branch(radiusesOfBranches[i], heightsOfBranches[i]));
+                dictBranches.Add(new Branch(radiusesOfBranches[i], heightsOfBranches[i]), new BranchPostion());
         }
 
         ~Tree()
@@ -63,7 +64,7 @@ namespace Forest
             this.age += 1 / daysOfYear;
             this.radius += radiusIncrement / daysOfYear;
             this.height += heightIncrement / daysOfYear;
-            foreach (Branch branch in branches)
+            foreach (Branch branch in dictBranches.Keys)
                 branch.Growing();
         }
 

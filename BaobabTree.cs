@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,8 +14,8 @@ namespace Forest
             {
                 double trunkVolume = Math.PI * Math.Pow(radius, 2) * height;
                 double branchesVolume = 0;
-                for (int i = 0; i < branches.Count; i++)
-                    branchesVolume += branches[i].Volume;
+                for (int i = 0; i < dictBranches.Keys.Count; i++)
+                    branchesVolume += dictBranches.Keys.ElementAt(i).Volume;
                 return trunkVolume += branchesVolume;
             }
         }
@@ -39,7 +40,7 @@ namespace Forest
             age += 1 / daysOfYear;
             radius += radiusIncrement / daysOfYear;
             height += heightIncrement / daysOfYear;
-            foreach (Branch branch in branches)
+            foreach (Branch branch in dictBranches.Keys)
                 branch.Growing();
         }
 

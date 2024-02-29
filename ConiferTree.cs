@@ -28,7 +28,7 @@ namespace Forest
             age += 1 / daysOfYear;
             radius += radiusIncrement / daysOfYear;
             height += heightIncrement / daysOfYear;
-            foreach (Branch branch in branches)
+            foreach (Branch branch in dictBranches.Keys)
                 branch.Growing();
         }
 
