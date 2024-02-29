@@ -9,6 +9,8 @@ namespace Forest
     internal class Branch
     {
         protected double radius, height;
+        private static double radiusIncrement = 0.01; // mm/year
+        private static double heightIncrement = 2.0; // mm/year
         public double Volume
         {
             get
@@ -32,6 +34,12 @@ namespace Forest
         ~Branch()
         {
             Console.WriteLine("The branch was destroyed.");
+        }
+
+        public void Growing() //daily
+        {
+            radius += radiusIncrement / Tree.daysOfYear;
+            height += heightIncrement / Tree.daysOfYear;
         }
     }
 }

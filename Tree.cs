@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,36 +12,44 @@ namespace Forest
 
         protected double age; //year
         protected double radius, height;
-        protected static double widthIncrement = 0.01; // mm/year
+        protected static double radiusIncrement = 0.01; // mm/year
         protected static double heightIncrement = 2.0; // mm/year
         public static double daysOfYear = 365.25;
         public virtual double Volume
         {
             get
             {
-                return Math.PI * Math.Pow(radius, 2) * height * 1.0 / 3.0;
+                double trunkVolume = Math.PI * Math.Pow(radius, 2) * height * 1.0 / 3.0;
+                double branchesVolume = 0;
+                for (int i = 0; i < branches.Count; i++)
+                    branchesVolume += branches[i].Volume;
+                return trunkVolume += branchesVolume;
             }
         }
         
         public double branchesCount;
         protected List<Branch> branches;
 
-        public Tree()
+        public Tree(double branchesCount = 0)
         {
-            age = 0;
-            radius = 0;
-            height = 0;
-            branchesCount = 0;
-            branches = new List<Branch>();
+            this.age = 0;
+            this.radius = 0;
+            this.height = 0;
+            this.branchesCount = branchesCount;
+            this.branches = new List<Branch>();
+            for (int i = 0; i < branchesCount; i++)
+                branches.Add(new Branch());
         }
 
-        public Tree(double radius, double height, double branchesCount)
+        public Tree(double radius, double height, double branchesCount, double[] radiusesOfBranches, double[] heightsOfBranches)
         {
-            age = 0;
+            this.age = 0;
             this.radius = radius;
             this.height = height;
             this.branchesCount = branchesCount;
             this.branches = new List<Branch>();
+            for (int i = 0; i < branchesCount; i++)
+                branches.Add(new Branch(radiusesOfBranches[i], heightsOfBranches[i]));
         }
 
         ~Tree()
@@ -53,11 +60,11 @@ namespace Forest
         public virtual void Growing() //daily
         {
             //throw new NotImplementedException();
-            age += 1 / daysOfYear;
-            radius += widthIncrement / daysOfYear;
-            height += heightIncrement / daysOfYear;
-            Branch branch1 = new Branch();
-            branches.Add(branch1);
+            this.age += 1 / daysOfYear;
+            this.radius += radiusIncrement / daysOfYear;
+            this.height += heightIncrement / daysOfYear;
+            foreach (Branch branch in branches)
+                branch.Growing();
         }
 
         //public double ObjemStromu(int count, double radiusKonara, double heightKonara)

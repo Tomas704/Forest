@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,16 +11,20 @@ namespace Forest
         {
             get
             {
-                return Math.PI * Math.Pow(radius, 2) * height;
+                double trunkVolume = Math.PI * Math.Pow(radius, 2) * height;
+                double branchesVolume = 0;
+                for (int i = 0; i < branches.Count; i++)
+                    branchesVolume += branches[i].Volume;
+                return trunkVolume += branchesVolume;
             }
         }
 
-        public BaobabTree()
+        public BaobabTree(double branchesCount = 0) : base (branchesCount)
         {
 
         }
 
-        public BaobabTree(double radius, double height, double pocetKonarov) : base(radius, height, pocetKonarov)
+        public BaobabTree(double radius, double height, double branchesCount, double[] radiusesOfBranches, double[] heightsOfBranches) : base(radius, height, branchesCount, radiusesOfBranches, heightsOfBranches)
         {
 
         }
@@ -34,8 +37,10 @@ namespace Forest
         public override void Growing() //daily
         {
             age += 1 / daysOfYear;
-            radius += widthIncrement / daysOfYear;
+            radius += radiusIncrement / daysOfYear;
             height += heightIncrement / daysOfYear;
+            foreach (Branch branch in branches)
+                branch.Growing();
         }
 
         public override string GetInfo()

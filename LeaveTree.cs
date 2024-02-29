@@ -8,12 +8,12 @@ namespace Forest
 {
     internal class LeafTree : Tree
     {
-        public LeafTree() : base()
+        public LeafTree(double branchesCount = 0) : base(branchesCount)
         {
 
         }
 
-        public LeafTree(double radius, double height, double pocetKonarov) : base(radius, height, pocetKonarov)
+        public LeafTree(double radius, double height, double branchesCount, double[] radiusesOfBranches, double[] heightsOfBranches) : base(radius, height, branchesCount, radiusesOfBranches, heightsOfBranches)
         {
 
         }
@@ -26,8 +26,10 @@ namespace Forest
         public override void Growing() //daily
         {
             age += 1 / daysOfYear;
-            radius += widthIncrement / daysOfYear;
+            radius += radiusIncrement / daysOfYear;
             height += heightIncrement / daysOfYear;
+            foreach (Branch branch in branches)
+                branch.Growing();
         }
 
         public override string GetInfo()
