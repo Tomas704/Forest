@@ -8,6 +8,6 @@ namespace Forest
 {
     internal interface IOrganizmus
     {
-        void Growing();
+        void Grow();
     }
 }

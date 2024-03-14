@@ -11,10 +11,11 @@ namespace Forest
         //public Tree() { }
         //~Tree() { }
 
+        public bool isDry;
         protected double age; //year
         protected double radius, height;
-        protected static double radiusIncrement = 0.01; // mm/year
-        protected static double heightIncrement = 2.0; // mm/year
+        protected static double radiusIncrement = 0.01 / daysOfYear; // mm/day
+        protected static double heightIncrement = 0.02 / daysOfYear; // mm/day
         public static double daysOfYear = 365.25;
         public virtual double Volume
         {
@@ -27,9 +28,9 @@ namespace Forest
                 return trunkVolume += branchesVolume;
             }
         }
-        
+
         public double branchesCount;
-        protected Dictionary<Branch,BranchPostion> dictBranches;
+        protected Dictionary<Branch, BranchPostion> dictBranches;
 
         public Tree(double branchesCount = 0)
         {
@@ -39,7 +40,7 @@ namespace Forest
             this.branchesCount = branchesCount;
             this.dictBranches = new Dictionary<Branch, BranchPostion>();
             for (int i = 0; i < branchesCount; i++)
-                dictBranches.Add(new Branch(), new BranchPostion());
+                dictBranches.Add(new Branch(), new BranchPostion(1, 1, 1));
         }
 
         public Tree(double radius, double height, double branchesCount, double[] radiusesOfBranches, double[] heightsOfBranches)
@@ -50,7 +51,7 @@ namespace Forest
             this.branchesCount = branchesCount;
             this.dictBranches = new Dictionary<Branch, BranchPostion>();
             for (int i = 0; i < branchesCount; i++)
-                dictBranches.Add(new Branch(radiusesOfBranches[i], heightsOfBranches[i]), new BranchPostion());
+                dictBranches.Add(new Branch(radiusesOfBranches[i], heightsOfBranches[i]), new BranchPostion(1, 1, 1));
         }
 
         ~Tree()
@@ -58,14 +59,14 @@ namespace Forest
             Console.WriteLine("The tree was destroyed.");
         }
 
-        public virtual void Growing() //daily
+        public virtual void Grow() //daily
         {
             //throw new NotImplementedException();
             this.age += 1 / daysOfYear;
-            this.radius += radiusIncrement / daysOfYear;
-            this.height += heightIncrement / daysOfYear;
+            this.radius += radiusIncrement;
+            this.height += heightIncrement;
             foreach (Branch branch in dictBranches.Keys)
-                branch.Growing();
+                branch.Grow();
         }
 
         //public double ObjemStromu(int count, double radiusKonara, double heightKonara)

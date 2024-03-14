@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forest
 {
-    internal class Branch
+    internal class Branch : IOrganizmus
     {
         protected double radius, height;
         private static double radiusIncrement = 0.01; // mm/year
@@ -36,7 +36,7 @@ namespace Forest
             Console.WriteLine("The branch was destroyed.");
         }
 
-        public void Growing() //daily
+        public void Grow() //daily
         {
             radius += radiusIncrement / Tree.daysOfYear;
             height += heightIncrement / Tree.daysOfYear;

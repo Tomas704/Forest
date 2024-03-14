@@ -8,9 +8,17 @@ namespace Forest
 {
     internal class BranchPostion
     {
-        public BranchPostion() { }
-        ~BranchPostion() { }
-        public double height;
-        public double verticalAngle;
+        private double x, y, z;
+
+        public BranchPostion(double x, double y, double z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+        ~BranchPostion()
+        {
+
+        }
     }
 }

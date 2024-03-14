@@ -35,13 +35,13 @@ namespace Forest
             Console.WriteLine("The baobab was destroyed.");
         }
 
-        public override void Growing() //daily
+        public override void Grow() //daily
         {
             age += 1 / daysOfYear;
             radius += radiusIncrement / daysOfYear;
             height += heightIncrement / daysOfYear;
             foreach (Branch branch in dictBranches.Keys)
-                branch.Growing();
+                branch.Grow();
         }
 
         public override string GetInfo()
